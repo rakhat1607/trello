@@ -1,0 +1,29 @@
+<div class="form-group mt-3">
+    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" th:text="#{label.newFolder}">
+    </button>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form th:action="@{'/addFolder'}" method="post" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" th:text="#{label.addNewFolder}"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mt-3">
+                    <div class="col-10 mx-auto">
+                        <div class="form-group">
+                            <label th:text="#{label.folderName}">
+                            </label>
+                            <input type="text" class="form-control" name="name">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" th:text="#{label.close}"></button>
+                <button type="submit" class="btn btn-success" th:text="#{label.addFolder}"></button>
+            </div>
+        </form>
+    </div>
+</div>

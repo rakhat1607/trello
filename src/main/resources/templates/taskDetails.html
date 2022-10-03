@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="layout/index.html">
+<div layout:fragment="mainPage">
+    <div class="card">
+        <div class="card-header">
+        </div>
+        <div class="card-body">
+                <div class="row mt-3">
+                    <div class="col-7 mx-auto">
+                        <div th:if="${task.status==0 || task.status==1}">
+                            <form th:action="@{/edittask}" method="post">
+                                <input type="hidden" name="task_id" th:value="${task.id}">
+                                <div class="form-group">
+                                    <label th:text="#{label.title}"></label>
+                                    <input type="text" name="name" th:value="${task.title}" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label th:text="#{label.description}"></label>
+                                    <textarea name="description" th:text="${task.description}" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label th:text="#{label.status}"></label>
+                                    <select name="status" class ="form-control">
+                                        <option value="0" th:selected="${task.status==0}">TO DO</option>
+                                        <option value="1" th:selected="${task.status==1}">IN TEST</option>
+                                        <option value="2" th:selected="${task.status==2}">DONE</option>
+                                        <option value="3" th:selected="${task.status==3}">FAILED</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <input type="hidden" th:value="${folder_id}" name="folder_id">
+                                    <button type="submit" class="btn btn-success" th:text="#{label.update}"></button>&nbsp;
+                                    <a type="button" class="btn btn-danger" th:href="@{'/deletetask/'+${folder_id}+'/'+${task.id}}" th:text="#{label.delete}"></a>
+                                </div>
+                            </form>
+                        </div>
+                        <div th:if="${task.status==2 || task.status==3}">
+                            <input type="hidden" name="task_id" th:value="${task.id}">
+                            <div class="form-group">
+                                <label th:text="#{label.title}"></label>
+                                <p type="text" name="name" th:text="${task.title}" ></p>
+                            </div>
+                            <div class="form-group">
+                                <label th:text="#{label.description}"></label>
+                                <p name="description" th:text="${task.description}" ></p>
+                            </div>
+                            <div class="form-group">
+                                <label th:text="#{label.status}"></label>
+                                <p  th:if="${task.status==2}" class="text-success">DONE</p>
+                                <p th:if="${task.status==3}" class="text-warning">FAILED</p>
+                            </div>
+                            <div class="form-group">
+                                <a type="button" class="btn btn-danger" th:href="@{'/deletetask/'+${folder_id}+'/'+${task.id}}" th:text="#{label.delete}"></a>
+                                <a type="button" class="btn btn-primary" th:href="@{'/folderDetails/'+${folder_id}}" th:text="#{label.back}"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+</html>
